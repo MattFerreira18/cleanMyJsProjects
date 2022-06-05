@@ -30,7 +30,6 @@ const sanitizeEntrypoint = (entrypoint) =>
     : entrypoint;
 
 function searchAndDelNodeModules(source) {
-  console.log('STARTING PROCESS TO REMOVE ALL `NODE_MODULES`');
 
   getDirentsInCurrDir(source, (dirents) => {
     dirents.forEach(dirent => {
@@ -39,12 +38,12 @@ function searchAndDelNodeModules(source) {
         : searchAndDelNodeModules(getDirSource(source, dirent));
     });
 
-    console.log('FINISHED PROCESS');
   });
 }
 
-const entrypoint = PROJECTS_DIR_ENTRYPOINT 
+
+const entrypoint = PROJECTS_DIR_ENTRYPOINT
   ? sanitizeEntrypoint(PROJECTS_DIR_ENTRYPOINT)
   : __dirname;
-
+  
 searchAndDelNodeModules(entrypoint);
