@@ -30,12 +30,16 @@ const sanitizeEntrypoint = (entrypoint) =>
     : entrypoint;
 
 function searchAndDelNodeModules(source) {
+  console.log('STARTING PROCESS TO REMOVE ALL `NODE_MODULES`');
+
   getDirentsInCurrDir(source, (dirents) => {
     dirents.forEach(dirent => {
       return isNodeModules(dirent)
         ? removeDir(getDirSource(source, dirent))
         : searchAndDelNodeModules(getDirSource(source, dirent));
     });
+
+    console.log('FINISHED PROCESS');
   });
 }
 
